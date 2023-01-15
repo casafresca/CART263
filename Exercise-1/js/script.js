@@ -100,6 +100,8 @@ function mouseClicked() {
                 playerState = 1;
             }
 
+            delete positionArray[coordinates[0] + coordinates[1]];
+
         }
     }
   

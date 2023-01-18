@@ -10,6 +10,7 @@ author, and this description to match your project!
 var playerState;
 var gameIsPlaying;
 var won;
+var restart;
 
 var positionArray = {
 
@@ -75,6 +76,7 @@ function setup() {
     background(255);
     playerState = 1;
     gameIsPlaying = true;
+    restart = false;
 }
 
 
@@ -153,6 +155,10 @@ function mouseClicked() {
 
         }
     }
+
+    if(restart == true){
+        location.reload();
+    }
   
 }
 
@@ -222,12 +228,15 @@ function gameEndMessage(str){
 function afterGameIsDone(){
     if(gameIsPlaying == false && won == "X"){
        gameEndMessage("X WINS!");
+       restart = true;
     }
     else if (gameIsPlaying == false && won == "O"){
         gameEndMessage("O WINS!");
+        restart = true;
     }
     else if (gameIsPlaying == false && won == "Draw"){
         gameEndMessage("IT'S A DRAW!");
+        restart = true;
     }
 }
 

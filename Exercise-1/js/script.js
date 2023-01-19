@@ -11,6 +11,8 @@ var playerState;
 var gameIsPlaying;
 var won;
 var restart;
+var P1score = 0;
+var P2score = 0;
 
 var positionArray = {
 
@@ -27,35 +29,6 @@ var positionArray = {
     "22":[[330, 495], [330, 500]]
 };
 
-var WinningOutcomes = {
-
-    //horizontal wins
-    "0":[[82.5, 82.5], [247.5, 247.5], [412.5, 82.5]],
-    "1":[[82.5, 247.5], [247.5,247.5], [412.5, 247.5]],
-    "2":[[82.5, 412.5], [247.5, 412.5], [412.5, 415]],
-
-    "3":[[412.5, 82.5], [247.5, 247.5], [82.5, 82.5]],
-    "4":[[412.5, 247.5], [247.5, 247.5], [82.5, 247.5]],
-    "5":[[412.5, 415], [247.5, 412.5], [82.5, 412.5]],
-
-    //Vertical wins
-    "6":[[82.5, 82.5], [82.5, 247.5], [82.5, 412.5]],
-    "7": [[247.5, 82.5], [247.5, 247.5], [247.5, 412.5]],
-    "8":[[412.5, 82.5], [412.5, 247.5], [412.5, 415]],
-
-    "9":[[82.5, 412.5], [82.5, 247.5], [82.5, 82.5]],
-    "10":[[247.5, 412.5], [247.5, 247.5], [247.5, 82.5]],
-    "11":[[412.5, 415], [412.5, 247.5], [412.5, 82.5]],
-
-    //Diagonal wins
-    "12":[[82.5, 82.5], [247.5, 247.5], [412.5, 415]],
-    "13":[[82.5, 412.5], [247.5, 247.5], [412.5, 82.5]],
-
-    "14":[[412.5, 415], [247.5, 247.5], [82.5, 82.5]],
-    "15":[[412.5, 82.5], [247.5, 247.5], [82.5, 412.5]]
-};
-
-
 var board = [[], [], []];
 var onBoard = [];
 
@@ -64,14 +37,14 @@ var onBoard = [];
 Description of preload
 */
 function preload() {
-
+  
 }
 
 
 /**
 Description of setup
 */
-function setup() {
+function setup() { 
     createCanvas(500,500);
     background(255);
     playerState = 1;
@@ -88,8 +61,7 @@ function draw() {
     drawGrid();
     afterGameIsDone();
     
-    //console.log(mouseX, mouseY);
-    
+    //console.log(mouseX, mouseY);    
 }
 
 function drawGrid(){
@@ -105,7 +77,6 @@ function drawGrid(){
 }
 
 function drawX(x, y){
-
     fill(0);
     translate(x, y);
     rotate(PI / 4);
@@ -164,6 +135,8 @@ function mouseClicked() {
 
 function checkForWinner(){
 
+    var currentScore1;
+    var currentScore2;
     var sumH1;
     var sumH2;
     var sumH3;
@@ -196,11 +169,15 @@ function checkForWinner(){
     if(sumH1 == 3 || sumH2 == 3 || sumH3 == 3 || sumV1 == 3 || sumV2 == 3 || sumV3 == 3 || sumD1 == 3 || sumD2 == 3){
         console.log("X has won");
         won = "X";
+        P1score++; 
+        //updateData(P1score);
         gameIsPlaying = false;
     }
     else if (sumH1 == 6 || sumH2 == 6 || sumH3 == 6 || sumV1 == 6 || sumV2 == 6 || sumV3 == 6 || sumD1 == 6 || sumD2 == 6){
         console.log("O has won");
         won = "O";
+        P2score++;
+        //updateData(P2score);
         gameIsPlaying = false;
     }
     else{
@@ -213,6 +190,9 @@ function checkForWinner(){
 }
 
 function gameEndMessage(str){
+    //var score1 = getItem("player1");
+    //var score2 = getItem("player2");
+
     background(255);
     strokeWeight(2);
     stroke(0);
@@ -220,6 +200,9 @@ function gameEndMessage(str){
     textSize(50);
     textAlign(CENTER);
     text(str, 300, 250);
+    textSize(30);
+    text("P1:" + P1score, 250, 300);
+    text("P2:" + P2score, 350, 300);
     textSize(20);
     noStroke();
     text("Click to restart", 300, 350);
@@ -240,4 +223,14 @@ function afterGameIsDone(){
     }
 }
 
+// function updateData(score){
+//     if(won == "X"){
+//         storeItem("player1", score);
+        
+//     }
+//     else if(won == "O"){
+//         storeItem("player2", score);
+        
+//     }
+// }
 

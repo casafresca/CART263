@@ -631,7 +631,7 @@ function displayColor(cardType){
     fill(189, 181, 103);
   }
   else if (cardType == "Effect Monster" || cardType == "Pendulum Effect Monster"){
-    fill(152, 96, 49);
+    fill(223, 155, 80);
   }
   else if (cardType == "Ritual Effect Monster" || cardType == "Pendulum Effect Ritual Monster"){
     fill(36, 90, 152);
@@ -659,7 +659,7 @@ function displayDescColor(cardType){
     fill(192, 177, 128);
   }
   else if (cardType == "Effect Monster"){
-    fill(155, 146, 117);
+    fill(230, 210, 197);
   }
   else if (cardType == "Ritual Effect Monster") {
     fill(156, 211, 235);

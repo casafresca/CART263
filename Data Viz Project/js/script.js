@@ -52,6 +52,8 @@ var windAttImage;
 var spellAttImage;
 var trapAttImage;
 
+var song;
+
 var counter = 0;
 
 String.prototype.insert = function (index, string) {
@@ -117,6 +119,9 @@ function preload() {
   itcStoneSerifBoldFont = loadFont('assets/fonts/ITC_Stone_Serif_Bold.otf');
   itcStoneSerifItalicFont = loadFont('assets/fonts/ITC_Stone_Serif_Italic.otf');
   goodTimingFont = loadFont('assets/fonts/good_timing_bd.otf');
+
+  //Load Song
+  song = createAudio('assets/sounds/Yu-Gi-Oh_Music.mp3');
   
 }
 
@@ -130,9 +135,14 @@ function setup() {
  
   rectMode(CENTER);
   imageMode(CENTER);
+
+  //play song in the background
+  song.volume(0.2);
+  song.loop();
 }
 
 function draw(){
+  //draws the cards
   switch (counter) {
     case 0:
       drawCard(darkMagician);

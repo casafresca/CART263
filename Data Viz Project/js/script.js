@@ -1,6 +1,5 @@
 
 var yugioh_card;
-
 var darkMagician;
 var darkMagicianGirl;
 var blueEyes;
@@ -8,6 +7,12 @@ var flameWingMan;
 var starDust;
 var utopia;
 var oddEyes;
+var oddEyesArc;
+var oddEyesGraph;
+var oddEyesRebellion;
+var oddEyesVenom;
+var oddEyesWing;
+var decodeTalker;
 var accessCodeTalker;
 var topologicZeroboros;
 var potOfGreed
@@ -30,6 +35,12 @@ var fwImage;
 var sdImage;
 var utImage;
 var oeImage;
+var oeaImage;
+var oegImage;
+var oerImage;
+var oevImage;
+var oewImage;
+var dcImage;
 var actImage;
 var tzImage;
 var pogImage;
@@ -53,8 +64,8 @@ String.prototype.insert = function (index, string) {
 
 function preload() {
 
+  //Connect to the Yugioh API
   yugioh_card = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php');
-
   darkMagician = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Dark%20Magician');
   darkMagicianGirl = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=dark%20magician%20girl');
   blueEyes = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Blue-Eyes%20Chaos%20MAX%20Dragon');
@@ -62,11 +73,18 @@ function preload() {
   starDust = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Stardust%20Dragon');
   utopia = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Number%2039:%20Utopia');
   oddEyes = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Odd-eyes%20Pendulum%20Dragon');
+  oddEyesArc = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Odd-Eyes%20Arc%20Pendulum%20Dragon');
+  oddEyesGraph = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=odd-eyes%20pendulumgraph%20dragon');
+  oddEyesRebellion = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=odd-eyes%20rebellion%20dragon');
+  oddEyesVenom = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=odd-eyes%20venom%20dragon');
+  oddEyesWing = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=odd-eyes%20wing%20dragon');
+  decodeTalker = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=decode%20talker');
   accessCodeTalker = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Accesscode%20Talker');
   potOfGreed = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Pot%20of%20Greed');
   mirrorForce = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Mirror%20Force');
   topologicZeroboros = loadJSON('https://db.ygoprodeck.com/api/v7/cardinfo.php?name=topologic%20zeroboros');
 
+  //Load Images
   backgroundImg = loadImage('assets/images/yugioh_background.png');
   darkAttImage = loadImage('assets/images/attribute_symbols/dark_attribute.png');
   lightAttImage = loadImage('assets/images/attribute_symbols/light_attribute.png');
@@ -80,12 +98,19 @@ function preload() {
   sdImage = loadImage('assets/images/monster_artwork/Stardust.png'); 
   utImage = loadImage('assets/images/monster_artwork/Utopia.png');
   oeImage = loadImage('assets/images/monster_artwork/Odd-Eyes.png');
+  oeaImage = loadImage('assets/images/monster_artwork/Odd-Eyes_Arc.png');
+  oegImage = loadImage('assets/images/monster_artwork/Odd-Eyes_Pendulumgraph.png');
+  oerImage = loadImage('assets/images/monster_artwork/Odd-Eyes_Rebellion.png');
+  oevImage = loadImage('assets/images/monster_artwork/Odd-Eyes_Venom.png');
+  oewImage = loadImage('assets/images/monster_artwork/Odd-Eyes_Wing.png');
+  dcImage = loadImage('assets/images/monster_artwork/Decode_Talker.png');
   actImage = loadImage('assets/images/monster_artwork/Access_Code_Talker.png');
   pogImage = loadImage('assets/images/monster_artwork/Pot_of_Greed.png');
   mfImage = loadImage('assets/images/monster_artwork/Mirror_Force.png');
   tzImage = loadImage('assets/images/monster_artwork/topologic_zeroboros.png');
   linkCardTexture = loadImage('assets/images/card_texture.png');
   
+  //Load Fonts
   matrixSmallCapsBoldFont = loadFont('assets/fonts/MatrixSmallCaps_Bold.ttf');
   matrixSmallCapsRomanFont = loadFont('assets/fonts/MatrixSmallCaps_Roman.ttf');
   matrixBookFont = loadFont('assets/fonts/Matrix-Book_Book.ttf');
@@ -100,21 +125,11 @@ function setup() {
   createCanvas(2000, 800);
   background(backgroundImg);
   
+  print(yugioh_card);
   print(darkMagician);
-  print(darkMagicianGirl);
-  print(blueEyes);
-  print(flameWingMan);
-  print(starDust);
-  print(utopia);
-  print(oddEyes);
-  print(accessCodeTalker);
-  print(topologicZeroboros);
-  print(potOfGreed);
-  print(mirrorForce);
-
+ 
   rectMode(CENTER);
   imageMode(CENTER);
-
 }
 
 function draw(){
@@ -141,23 +156,40 @@ function draw(){
       drawCard(oddEyes);
       break;
     case 7:
-      drawCard(accessCodeTalker);
+      drawCard(oddEyesArc);
       break;
     case 8:
-      drawCard(topologicZeroboros);
+      drawCard(oddEyesGraph);
       break;
     case 9:
-      drawCard(potOfGreed);
+      drawCard(oddEyesVenom);
       break;
     case 10:
+      drawCard(oddEyesWing);
+      break;
+    case 11:
+      drawCard(oddEyesRebellion);
+      break;
+    case 12:
+      drawCard(decodeTalker);
+      break;
+    case 13:
+      drawCard(accessCodeTalker);
+      break;
+    case 14:
+      drawCard(topologicZeroboros);
+      break;
+    case 15:
+      drawCard(potOfGreed);
+      break;
+    case 16:
       drawCard(mirrorForce);
   }
-  //print(mouseX, mouseY);
 }
 
 function mousePressed() {
   counter++;
-  if(counter > 10){
+  if(counter > 16){
     counter = 0;
   }
 }
@@ -255,8 +287,14 @@ function drawCard(card){
     push();
     textSize(25);
     textFont(matrixSmallCapsBoldFont);
-    text(card.data[0].scale, 799, 459);
-    text(card.data[0].scale, 1195, 459);
+    if (card.data[0].scale > 9){
+      text(card.data[0].scale, 796, 459);
+      text(card.data[0].scale, 1190, 459);
+    }
+    else{
+      text(card.data[0].scale, 799, 459);
+      text(card.data[0].scale, 1195, 459);
+    }
     pop();
   }
 
@@ -302,14 +340,20 @@ function drawCard(card){
     fill(0);
   }
 
-  if (card.data[0].name == "Blue-Eyes Chaos MAX Dragon" || card.data[0].name == "Odd-Eyes Pendulum Dragon"){
+  if (card.data[0].name == "Blue-Eyes Chaos MAX Dragon" || card.data[0].name == "Odd-Eyes Pendulum Dragon" || card.data[0].name == "Odd-Eyes Rebellion Dragon"){
     textSize(30);
   }
-  else if (card.data[0].name == "Elemental HERO Flame Wingman"){
+  else if (card.data[0].name == "Elemental HERO Flame Wingman" || card.data[0].name == "Odd-Eyes Pendulumgraph Dragon"){
     textSize(25);
   }
   else if (card.data[0].name == "Topologic Zeroboros"){
     textSize(40);
+  }
+  else if (card.data[0].name == "Odd-Eyes Arc Pendulum Dragon") {
+    textSize(27);
+  }
+  else if (card.data[0].name == "Odd-Eyes Venom Dragon" || card.data[0].name == "Odd-Eyes Wing Dragon") {
+    textSize(35);
   }
   else{
     textSize(45);
@@ -377,7 +421,12 @@ function drawCard(card){
 
   //card description
   push();
-  if (card.data[0].name == "Accesscode Talker" || card.data[0].name == "Topologic Zeroboros"){
+  if (card.data[0].name == "Accesscode Talker" 
+    || card.data[0].name == "Topologic Zeroboros" 
+    || card.data[0].name == "Odd-Eyes Pendulumgraph Dragon" 
+    || card.data[0].name == "Odd-Eyes Venom Dragon" 
+    || card.data[0].name == "Odd-Eyes Wing Dragon" 
+    || card.data[0].name == "Odd-Eyes Rebellion Dragon"){
     textSize(10);
   }
   else{
@@ -494,6 +543,24 @@ function displayArtwork(name){
   else if (name == "Odd-Eyes Pendulum Dragon"){
     image(oeImage, 1004, 290, 450, 205);
   }
+  else if(name ==  "Odd-Eyes Arc Pendulum Dragon"){
+     image(oeaImage, 1004, 290, 450, 205);
+  }
+  else if(name ==  "Odd-Eyes Pendulumgraph Dragon"){
+     image(oegImage, 1004, 290, 450, 205);
+  }
+  else if(name ==  "Odd-Eyes Rebellion Dragon"){
+     image(oerImage, 1004, 290, 450, 205);
+  }
+  else if(name ==  "Odd-Eyes Venom Dragon"){
+     image(oevImage, 1004, 290, 450, 205);
+  }
+  else if(name ==  "Odd-Eyes Wing Dragon"){
+     image(oewImage, 1004, 290, 450, 205);
+  }
+  else if(name ==  "Decode Talker"){
+    image(dcImage, 1001, 320, 300, 300);
+  }
   else if (name == "Accesscode Talker"){
     image(actImage, 1001, 320, 300, 300);
   }
@@ -523,9 +590,13 @@ function displayDescription(card, cardName){
     let descArray = pdesc.split(/\[|\]/);
     push();
     textSize(13);
+    textFont(matrixBookFont);
     text(descArray[2], 1005, 455, 310, 105);
     pop();
     text(descArray[4], 1005, 610, 445, 150);
+  }
+  else if (cardName == "Decode Talker"){
+    text(card.data[0].desc.insert(18, "\n"), 1005, 610, 410, 150);
   }
   else if (cardName == "Accesscode Talker"){
     text(card.data[0].desc.insert(18, "\n"), 1005, 610, 408, 150);

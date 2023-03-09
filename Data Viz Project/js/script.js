@@ -19,6 +19,8 @@ var potOfGreed
 var mirrorForce;
 
 var backgroundImg;
+var lessPopularBackground;
+var notPopularBackground;
 var linkCardTexture;
 
 var matrixSmallCapsBoldFont;
@@ -88,6 +90,8 @@ function preload() {
 
   //Load Images
   backgroundImg = loadImage('assets/images/yugioh_background.png');
+  lessPopularBackground = loadImage('assets/images/less_popular_card_background.jpg');
+  notPopularBackground = loadImage('assets/images/Not_Popular_card_background.png');
   darkAttImage = loadImage('assets/images/attribute_symbols/dark_attribute.png');
   lightAttImage = loadImage('assets/images/attribute_symbols/light_attribute.png');
   windAttImage = loadImage('assets/images/attribute_symbols/wind_attribute.png');
@@ -128,7 +132,7 @@ function preload() {
 function setup() {
 
   createCanvas(2000, 800);
-  background(backgroundImg);
+  //background(backgroundImg);
   
   print(yugioh_card);
   print(darkMagician);
@@ -145,56 +149,75 @@ function draw(){
   //draws the cards
   switch (counter) {
     case 0:
+      image(backgroundImg, 1003, 355, 1992, 1000);
       drawCard(darkMagician);
       break;
     case 1:
+      image(backgroundImg, 1003, 355, 1992, 1000);
       drawCard(darkMagicianGirl);
       break;
     case 2:
+      image(backgroundImg, 1003, 355, 1992, 1000);
       drawCard(blueEyes);
       break;
     case 3:
+      image(backgroundImg, 1003, 355, 1992, 1000);
       drawCard(flameWingMan);
       break;
     case 4:
+      image(backgroundImg, 1003, 355, 1992, 1000);
       drawCard(starDust);
       break;
     case 5:
+      image(backgroundImg, 1003, 355, 1992, 1000);
       drawCard(utopia);
       break;
     case 6:
+      image(backgroundImg, 1003, 355, 1992, 1000);
       drawCard(oddEyes);
       break;
     case 7:
+      image(notPopularBackground, 1003, 355, 1992, 1000);
       drawCard(oddEyesArc);
       break;
     case 8:
+      image(notPopularBackground, 1003, 355, 1992, 1000);
       drawCard(oddEyesGraph);
       break;
     case 9:
+      image(notPopularBackground, 1003, 355, 1992, 1000);
       drawCard(oddEyesVenom);
       break;
     case 10:
+      image(notPopularBackground, 1003, 355, 1992, 1000);
       drawCard(oddEyesWing);
       break;
     case 11:
+      image(notPopularBackground, 1003, 355, 1992, 1000);
       drawCard(oddEyesRebellion);
       break;
     case 12:
+      image(lessPopularBackground, 1003, 355, 1992, 1000);
       drawCard(decodeTalker);
       break;
     case 13:
+      image(backgroundImg, 1003, 355, 1992, 1000);
       drawCard(accessCodeTalker);
       break;
     case 14:
+      image(lessPopularBackground, 1003, 355, 1992, 1000);
       drawCard(topologicZeroboros);
       break;
     case 15:
+      image(backgroundImg, 1003, 355, 1992, 1000);
       drawCard(potOfGreed);
       break;
     case 16:
+      image(backgroundImg, 1003, 355, 1992, 1000);
       drawCard(mirrorForce);
   }
+
+  print(mouseX, mouseY);
 }
 
 function mousePressed() {
